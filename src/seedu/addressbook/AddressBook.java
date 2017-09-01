@@ -17,8 +17,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -144,9 +142,19 @@ public class AddressBook {
      * used by the internal String[] storage format.
      * For example, a person's name is stored as the 0th element in the array.
      */
-    private static final int PERSON_DATA_INDEX_NAME = 0;
-    private static final int PERSON_DATA_INDEX_PHONE = 1;
-    private static final int PERSON_DATA_INDEX_EMAIL = 2;
+
+    private enum PERSON_PROPERTY {
+        NAME(0), PHONE(1), EMAIL(2);
+        private int value;
+
+        PERSON_PROPERTY(int value){
+            this.value = value;
+        }
+
+        public int getValue(){
+            return value;
+        }
+    }
 
     /**
      * The number of data elements for a single person.
@@ -842,7 +850,7 @@ public class AddressBook {
      * @param person whose name you want
      */
     private static String getNameFromPerson(HashMap<Integer,String> person) {
-        return person.get(PERSON_DATA_INDEX_NAME);
+        return person.get(PERSON_PROPERTY.NAME.getValue());
     }
 
     /**
@@ -851,7 +859,7 @@ public class AddressBook {
      * @param person whose phone number you want
      */
     private static String getPhoneFromPerson(HashMap<Integer,String> person) {
-        return person.get(PERSON_DATA_INDEX_PHONE);
+        return person.get(PERSON_PROPERTY.PHONE.getValue());
     }
 
     /**
@@ -860,7 +868,7 @@ public class AddressBook {
      * @param person whose email you want
      */
     private static String getEmailFromPerson(HashMap<Integer,String> person) {
-        return person.get(PERSON_DATA_INDEX_EMAIL);
+        return person.get(PERSON_PROPERTY.EMAIL.getValue());
     }
 
     /**
@@ -872,17 +880,11 @@ public class AddressBook {
      * @return constructed person
      */
     private static HashMap<Integer,String> makePersonFromData(String name, String phone, String email) {
-        /* Original code
-        final String[] person = new String[PERSON_DATA_COUNT];
-        person[PERSON_DATA_INDEX_NAME] = name;
-        person[PERSON_DATA_INDEX_PHONE] = phone;
-        person[PERSON_DATA_INDEX_EMAIL] = email;
-        System.out.println(person.toString());
-        */
+
         final HashMap<Integer,String> person = new HashMap<>();
-        person.put(PERSON_DATA_INDEX_NAME,name);
-        person.put(PERSON_DATA_INDEX_PHONE,phone);
-        person.put(PERSON_DATA_INDEX_EMAIL,email);
+        person.put(PERSON_PROPERTY.NAME.getValue(),name);
+        person.put(PERSON_PROPERTY.PHONE.getValue(),phone);
+        person.put(PERSON_PROPERTY.EMAIL.getValue(),email);
 
         return person;
     }
@@ -1041,9 +1043,9 @@ public class AddressBook {
      * @param person String array representing the person (used in internal data)
      */
     private static boolean isPersonDataValid(HashMap<Integer,String> person) {
-        return isPersonNameValid(person.get(PERSON_DATA_INDEX_NAME))
-                && isPersonPhoneValid(person.get(PERSON_DATA_INDEX_PHONE))
-                && isPersonEmailValid(person.get(PERSON_DATA_INDEX_EMAIL));
+        return isPersonNameValid(person.get(PERSON_PROPERTY.NAME.getValue()))
+                && isPersonPhoneValid(person.get(PERSON_PROPERTY.PHONE.getValue()))
+                && isPersonEmailValid(person.get(PERSON_PROPERTY.EMAIL.getValue()));
     }
 
     /*
