@@ -1074,7 +1074,7 @@ public class AddressBook {
     private static boolean isPersonPhoneValid(String phone) {
         return phone.matches("[6,8,9]\\d{7}");    // phone nonempty sequence of digits
         //TODO: implement a more permissive validation
-        //Phone 8 digit validation
+        //Phone number must begin with 6,8,9 and 8 digit validation
     }
 
     /**
@@ -1084,7 +1084,7 @@ public class AddressBook {
      * @return whether arg is a valid person email
      */
     private static boolean isPersonEmailValid(String email) {
-        return email.matches("\\S+@\\S+\\.\\S+"); // email is [non-whitespace]@[non-whitespace].[non-whitespace]
+        return email.matches("(\\S+@hotmail\\.\\S+)|(\\S+@gmail\\.\\S+)|(\\S+@u.nus.edu)"); // email is [non-whitespace]@[non-whitespace].[non-whitespace]
         //TODO: implement a more permissive validation
         //Email validation allowing only hotmail, gmail and u.nus.edu.
     }
