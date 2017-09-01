@@ -10,10 +10,12 @@ package seedu.addressbook;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -158,11 +160,6 @@ public class AddressBook {
     }
 
     /**
-     * The number of data elements for a single person.
-     */
-    private static final int PERSON_DATA_COUNT = 3;
-
-    /**
      * Offset required to convert between 1-indexing and 0-indexing.COMMAND_
      */
     private static final int DISPLAYED_INDEX_OFFSET = 1;
@@ -200,7 +197,7 @@ public class AddressBook {
      * This is a subset of the full list. Deleting persons in the pull list does not delete
      * those persons from this list.
      */
-    private static ArrayList<HashMap<Integer,String>> latestPersonListingView = getAllPersonsInAddressBook(); // initial view is of all
+    private static ArrayList<HashMap<Integer,String>> latestPersonListingView = getAllPersonsInAddressBook(); // Initial launch list all persons
 
     /**
      * The path to the file used for storing person data.
@@ -1066,6 +1063,7 @@ public class AddressBook {
     private static boolean isPersonNameValid(String name) {
         return name.matches("(\\w|\\s)+");  // name is nonempty mixture of alphabets and whitespace
         //TODO: implement a more permissive validation
+        //Case-sensitive naming (only lower-case)?
     }
 
     /**
@@ -1074,8 +1072,9 @@ public class AddressBook {
      * @param phone to be validated
      */
     private static boolean isPersonPhoneValid(String phone) {
-        return phone.matches("\\d+");    // phone nonempty sequence of digits
+        return phone.matches("[6,8,9]\\d{7}");    // phone nonempty sequence of digits
         //TODO: implement a more permissive validation
+        //Phone 8 digit validation
     }
 
     /**
@@ -1087,6 +1086,7 @@ public class AddressBook {
     private static boolean isPersonEmailValid(String email) {
         return email.matches("\\S+@\\S+\\.\\S+"); // email is [non-whitespace]@[non-whitespace].[non-whitespace]
         //TODO: implement a more permissive validation
+        //Email validation allowing only hotmail, gmail and u.nus.edu.
     }
 
 
