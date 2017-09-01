@@ -143,11 +143,12 @@ public class AddressBook {
      * For example, a person's name is stored as the 0th element in the array.
      */
 
-    private enum PERSON_PROPERTY {
+    // [LO-Enums] - must be nouns and written in PascalCase
+    private enum PersonProperty {
         NAME(0), PHONE(1), EMAIL(2);
         private int value;
 
-        PERSON_PROPERTY(int value){
+        PersonProperty(int value){
             this.value = value;
         }
 
@@ -850,7 +851,7 @@ public class AddressBook {
      * @param person whose name you want
      */
     private static String getNameFromPerson(HashMap<Integer,String> person) {
-        return person.get(PERSON_PROPERTY.NAME.getValue());
+        return person.get(PersonProperty.NAME.getValue());
     }
 
     /**
@@ -859,7 +860,7 @@ public class AddressBook {
      * @param person whose phone number you want
      */
     private static String getPhoneFromPerson(HashMap<Integer,String> person) {
-        return person.get(PERSON_PROPERTY.PHONE.getValue());
+        return person.get(PersonProperty.PHONE.getValue());
     }
 
     /**
@@ -868,7 +869,7 @@ public class AddressBook {
      * @param person whose email you want
      */
     private static String getEmailFromPerson(HashMap<Integer,String> person) {
-        return person.get(PERSON_PROPERTY.EMAIL.getValue());
+        return person.get(PersonProperty.EMAIL.getValue());
     }
 
     /**
@@ -882,9 +883,9 @@ public class AddressBook {
     private static HashMap<Integer,String> makePersonFromData(String name, String phone, String email) {
 
         final HashMap<Integer,String> person = new HashMap<>();
-        person.put(PERSON_PROPERTY.NAME.getValue(),name);
-        person.put(PERSON_PROPERTY.PHONE.getValue(),phone);
-        person.put(PERSON_PROPERTY.EMAIL.getValue(),email);
+        person.put(PersonProperty.NAME.getValue(),name);
+        person.put(PersonProperty.PHONE.getValue(),phone);
+        person.put(PersonProperty.EMAIL.getValue(),email);
 
         return person;
     }
@@ -933,6 +934,7 @@ public class AddressBook {
         if (!isPersonDataExtractableFrom(encoded)) {
             return Optional.empty();
         }
+        // [LO-Collections]
         final HashMap<Integer,String> decodedPerson = makePersonFromData(
                 extractNameFromPersonString(encoded),
                 extractPhoneFromPersonString(encoded),
@@ -1043,9 +1045,9 @@ public class AddressBook {
      * @param person String array representing the person (used in internal data)
      */
     private static boolean isPersonDataValid(HashMap<Integer,String> person) {
-        return isPersonNameValid(person.get(PERSON_PROPERTY.NAME.getValue()))
-                && isPersonPhoneValid(person.get(PERSON_PROPERTY.PHONE.getValue()))
-                && isPersonEmailValid(person.get(PERSON_PROPERTY.EMAIL.getValue()));
+        return isPersonNameValid(person.get(PersonProperty.NAME.getValue()))
+                && isPersonPhoneValid(person.get(PersonProperty.PHONE.getValue()))
+                && isPersonEmailValid(person.get(PersonProperty.EMAIL.getValue()));
     }
 
     /*
