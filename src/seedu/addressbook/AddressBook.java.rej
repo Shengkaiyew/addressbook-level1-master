@@ -1,0 +1,26 @@
+diff a/src/seedu/addressbook/AddressBook.java b/src/seedu/addressbook/AddressBook.java	(rejected hunks)
+@@ -144,9 +144,24 @@
+      * used by the internal String[] storage format.
+      * For example, a person's name is stored as the 0th element in the array.
+      */
++
++    /* Original code
+     private static final int PERSON_DATA_INDEX_NAME = 0;
+     private static final int PERSON_DATA_INDEX_PHONE = 1;
+     private static final int PERSON_DATA_INDEX_EMAIL = 2;
++    */
++
++    private enum PERSON_PROPERTY {
++        NAME(0), PHONE(1), EMAIL(2);
++
++        private final int value;
++
++        PERSON_PROPERTY(final int newValue) {
++            value = newValue;
++        }
++
++        public int getValue() { return value; }
++    };
+ 
+     /**
+      * The number of data elements for a single person.
