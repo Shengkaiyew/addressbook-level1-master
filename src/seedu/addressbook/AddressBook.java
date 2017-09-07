@@ -144,6 +144,16 @@ public class AddressBook {
      * used by the internal String[] storage format.
      * For example, a person's name is stored as the 0th element in the array.
      */
+    Test newTest = new Test();
+
+    private void setTestScore(double score){
+        newTest.setScore(score);
+
+    }
+
+    private double getTestScore(double score){
+        return newTest.getScore();
+    }
 
     // [LO-Enums] - must be nouns and written in PascalCase
     private enum PersonProperty {
@@ -688,7 +698,7 @@ public class AddressBook {
      */
     private static void updateLatestViewedPersonListing(ArrayList<HashMap<Integer,String>> newListing) {
         // clone to insulate from future changes to arg list
-        latestPersonListingView = new ArrayList<HashMap<Integer,String>>(newListing);
+        latestPersonListingView = new ArrayList<>(newListing);
     }
 
     /**
@@ -1072,7 +1082,7 @@ public class AddressBook {
      * @param phone to be validated
      */
     private static boolean isPersonPhoneValid(String phone) {
-        return phone.matches("[6,8,9]\\d{7}");    // phone nonempty sequence of digits
+        return phone.matches("[689]\\d{7}");    // phone nonempty sequence of digits
         //TODO: implement a more permissive validation
         //Phone number must begin with 6,8,9 and 8 digit validation
     }

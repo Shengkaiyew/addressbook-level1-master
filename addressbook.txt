@@ -1,3 +1,4 @@
 phoneAndEmailCheck p/62345678 e/hello@hotmail.com
 gmailUser p/92345678 e/userG@gmail.com
 nusStudent p/92345678 e/hello@u.nus.edu
+testPerson p/91462440 e/hello@gmail.com
